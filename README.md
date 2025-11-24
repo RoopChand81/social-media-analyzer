@@ -39,7 +39,7 @@ npm install
 npm run dev
 ```
 
-### Notes / Changes made
+<!-- ### Notes / Changes made
 - Replaced `pdf-parse` parsing with `pdfjs-dist` in backend/controllers/analyzeController.js for better text layout preservation.
 - `backend/routes/upload.js` now enforces file size (10MB) and allowed MIME types.
 - `backend/controllers/analyzeController.js` now:
@@ -58,4 +58,4 @@ npm run dev
 ## Deliverables
 - Hosted App URL: (deploy after making changes)
 - GitHub repo: push changes
-- 200-word write-up: see writeup-200-words.txt
+- 200-word write-up: see writeup-200-words.txt -->
