@@ -119,6 +119,7 @@ export default function ResultPane({ result }) {
           </div>
         )}
       </div>
+      
     </div>
   );
 }
