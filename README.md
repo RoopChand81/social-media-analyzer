@@ -5,7 +5,7 @@ An AI-powered tool that extracts text from PDFs and images, analyzes it, and gen
 ---
 
 ## 🌐 Live Deployment  
-**Live Link :** https://your-frontend-live-link.com
+**Live Link :** https://social-media-analyzer-frontend-delta.vercel.app/
 
 ---
 
@@ -162,8 +162,13 @@ Add your screenshot image links inside the code block below:
 
 ```
 /screenshots/upload.png
-/screenshots/results.png
-/screenshots/mobile-view.png
+/screenshots/result1.png
+/screenshots/result2.png
+/screenshots/result3.png
+/screenshots/result4.png
+/screenshots/result5.png
+/screenshots/result6.png
+
 ```
 
 (Just replace the filenames with actual image paths.)
