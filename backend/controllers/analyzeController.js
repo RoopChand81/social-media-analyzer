@@ -113,11 +113,30 @@ has_cta: ${hasCTA}
 
 
     let aiSuggestions = "";
+    let finalSuggestions="";
     try {
       aiSuggestions = await generateContent(aiPrompt);
+      // Step 1: Try to parse directly
+      let temp = aiSuggestions;
+
+      try {
+        temp = JSON.parse(temp); // first parse
+      } catch (e) {
+        // ignore
+      }
+      // Step 2: If still a string, parse again
+      if (typeof temp === "string") {
+        try {
+          temp = JSON.parse(temp); // second parse
+        } catch (e) {
+          // still invalid → leave as string
+        }
+      }
+
+      finalSuggestions = temp;
     } catch (err) {
       console.error("AI generation failed:", err?.message || err);
-      // Fallback: create simple suggestions
+      // Fallback: create simple suggestions manual form
       aiSuggestions = JSON.stringify({
         suggestions: [
           "Start with a strong hook in the first sentence.",
@@ -126,8 +145,8 @@ has_cta: ${hasCTA}
           "Shorten long sentences and keep paragraphs small.",
           "Consider adding 1–2 emojis to increase visibility."
         ],
-        instagram: extractedText.slice(0, 2200),
-        linkedin: extractedText.slice(0, 1300),
+        instagram: extractedText.slice(0, 220),
+        linkedin: extractedText.slice(0, 130),
         scores: { engagement: 50, readability: readability, cta: hasCTA ? 80 : 20 }
       }, null, 2);
     }
@@ -145,11 +164,12 @@ has_cta: ${hasCTA}
     } catch (dbErr) {
       console.warn("DB save failed (non-fatal):", dbErr.message);
     }
+   // console.log("type of ai Suggestions",typeof finalSuggestions);
 
     return res.json({
       success: true,
       extractedText,
-      aiSuggestions,
+      aiSuggestions:finalSuggestions,
       meta: { hashtags, readability, hasCTA },
     });
   } catch (err) {

@@ -23,6 +23,7 @@ async function generateContent(prompt) {
     const res = await model.generateContent(prompt);
     // Attempt to return string or object
     const txt = res?.response?.text && typeof res.response.text === "function" ? res.response.text() : (res?.response?.text || "");
+    //console.log("type of ai suge",typeof txt);
     return txt;
   } else {
     // If no model available, throw so caller can fallback locally
