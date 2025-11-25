@@ -19,5 +19,13 @@ mongoose
   .then(() => console.log("MongoDB Connected"))
   .catch((err) => console.log(err));
 
+app.get("/",(req,res)=>{
+  return "this is hom"
+})
+
+app.get("/", (req, res) => {
+  res.send("Social Media Analyzer Backend is Running 🚀");
+});
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log("Server running on port", PORT));
