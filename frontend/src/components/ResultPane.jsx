@@ -18,6 +18,7 @@ export default function ResultPane({ result }) {
   } catch {
     parsed = null;
   }
+  console.log("print type",typeof parsed);
 
   return (
     <div className="space-y-6">
@@ -55,6 +56,7 @@ export default function ResultPane({ result }) {
         <h2 className="text-xl font-bold mb-4">AI Suggestions</h2>
 
         {/* JSON → FORMATTED UI */}
+      
         {parsed ? (
           <div className="space-y-6 max-h-96 overflow-y-auto pr-2">
 

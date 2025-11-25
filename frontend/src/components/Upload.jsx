@@ -32,14 +32,13 @@ export default function Upload({ setResult }) {
   const upload = async () => {
     if (!selectedFile) return setError("Please select a file first.");
     setLoading(true);
-    setProgress(0);
-    setError(null);
+     setError(null);
 
     const form = new FormData();
     form.append("file", selectedFile);
 
     try {
-      const res = await axios.post("https://social-media-analyzer-tau.vercel.app/api/upload", form, {
+      const res = await axios.post("https://social-media-analyzer-backend-80hw.onrender.com/api/upload", form, {
         onUploadProgress: (e) => {
           const p = Math.round((e.loaded * 100) / e.total);
           setProgress(p);
