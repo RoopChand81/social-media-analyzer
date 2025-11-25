@@ -80,36 +80,61 @@ async function analyzeFile(req, res) {
 
     // Prepare prompt for AI: include analysis hints so the AI focuses on social media engagement
     const aiPrompt = `
-You are a concise social-media optimization assistant.
+          You are an expert social-media strategist.  
+          Analyze the text and generate structured, platform-ready recommendations.
 
-Your output must follow these strict rules:
-- Suggestions must be VERY SHORT (max 6 items, each under 10 words).
-- Use simple bullet phrases only (no long sentences).
-- Emojis allowed but max 1 per suggestion.
-- Keep the Instagram and LinkedIn versions extremely short (2–3 lines max).
-- No long paragraphs.
-- No extra blank lines.
-- No explanations.
-- Output must be CLEAN JSON only.
+          Your output MUST follow these rules:
+          - CLEAN JSON only (no markdown, no code blocks).
+          - All sections must be short, polished, and actionable.
+          - No blank lines, no long paragraphs.
 
-Return JSON in this exact structure:
-{
-  "suggestions": ["short tip 1", "short tip 2", ...],
-  "instagram": "2–3 line optimized caption",
-  "linkedin": "2–3 line professional caption",
-  "scores": { "engagement": number, "readability": number, "cta": number }
-}
+          SUGGESTIONS:
+          - Provide 5–7 well-defined improvement suggestions.
+          - Each under 12 words.
+          - Context-specific and actionable.
+          - Emojis optional (max 1 per suggestion).
 
-Now analyze the text below using the metadata and generate the JSON only.
+          INSTAGRAM SECTION:
+          - Create a short 2–3 line Instagram caption.
+          - DO NOT include hashtags in the caption.
+          - Generate a SEPARATE array of 4–6 Instagram hashtags.
 
-Original Text:
-"""${extractedText}"""
+          LINKEDIN SECTION:
+          - Create a short 2–3 line professional LinkedIn caption.
+          - DO NOT include hashtags in the caption.
+          - Generate a SEPARATE array of 4–6 LinkedIn hashtags.
 
-Metadata:
-hashtags: ${JSON.stringify(hashtags)}
-readability_score: ${readability}
-has_cta: ${hasCTA}
-`;
+          SOCIAL HANDLE TIPS:
+          - Provide 3–5 platform-specific optimization tips.
+          - Each under 10 words.
+
+          OUTPUT JSON FORMAT:
+          {
+            "suggestions": ["tip1", "tip2", ...],
+            "instagram": {
+              "caption": "short caption",
+              "hashtags": ["#tag1", "#tag2", ...]
+            },
+            "linkedin": {
+              "caption": "short caption",
+              "hashtags": ["#tag1", "#tag2", ...]
+            },
+            "social_tips": ["tip1", "tip2", "tip3"],
+            "scores": { "engagement": number, "readability": number, "cta": number }
+          }
+
+          Now analyze the text below and generate ONLY the JSON.
+
+          Original Text:
+          """${extractedText}"""
+
+          Metadata:
+          hashtags: ${JSON.stringify(hashtags)}
+          readability_score: ${readability}
+          has_cta: ${hasCTA}
+
+
+    `;
 
 
     let aiSuggestions = "";

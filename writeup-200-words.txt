@@ -1,0 +1,13 @@
+This project implements a Social Media Content Analyzer that accepts PDF and image uploads,
+extracts text, and produces focused engagement improvements.I used pdfjs (pdfjs-dist) 
+for PDF parsing to better preserve formatting, and Tesseract.js for OCR on scanned images.
+After extraction, the backend runs lightweight heuristics — hashtag extraction, a simple 
+readability estimate, and CTA detection — to gather metadata.The system then constructs a
+concise prompt targeted at social-media optimization and sends it to a generative model 
+(Gemini) when available; if the model is not configured, the server returns a deterministic
+fallback of practical suggestions.On the frontend, I improved UX by adding drag-and-drop 
+highlights, file size/type validation (10MB), progress feedback, and clear error messages.
+The project includes basic persistence to MongoDB for uploaded file metadata, and the README 
+now contains local setup and deployment guidance.These changes align the app closely 
+with the assignment brief by preserving PDF formatting, supporting OCR, providing engagement-focused 
+output, and delivering improved error handling and loading states.

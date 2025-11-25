@@ -183,5 +183,5 @@ This tool helps creators, professionals, and marketers instantly convert raw tex
 
 ## 📝 Footer
 
-**© 2025 Social Media Analyzer — Built with ❤️ using Roopchand**
+**© 2025 Social Media Analyzer — Built ❤️ with Roopchand**
 
