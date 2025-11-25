@@ -11,14 +11,37 @@ export default function ResultPane({ result }) {
 
   const { extractedText, aiSuggestions, meta } = result;
 
-  // Try to parse JSON
+  // ==============================
+  //  FINAL JSON PARSER (with cleanup)
+  // ==============================
   let parsed = null;
+
   try {
-    parsed = JSON.parse(aiSuggestions);
-  } catch {
+    let cleaned = aiSuggestions;
+
+    // Remove markdown code blocks like ```json ... ```
+    if (typeof cleaned === "string") {
+      cleaned = cleaned.replace(/```json|```/g, "").trim();
+    }
+
+    // Backend already sent object?
+    if (cleaned && typeof cleaned === "object") {
+      parsed = cleaned;
+    } else {
+      // FIRST parse
+      if (typeof cleaned === "string") cleaned = JSON.parse(cleaned);
+
+      // SECOND parse (double-encoded JSON)
+      if (typeof cleaned === "string") cleaned = JSON.parse(cleaned);
+
+      if (typeof cleaned === "object") parsed = cleaned;
+    }
+  } catch (err) {
+    console.error("JSON parsing failed:", err);
     parsed = null;
   }
-  console.log("print type",typeof parsed);
+
+  //console.log("PARSED FINAL:", parsed);
 
   return (
     <div className="space-y-6">
@@ -55,44 +78,34 @@ export default function ResultPane({ result }) {
       <div className="bg-white shadow rounded p-4">
         <h2 className="text-xl font-bold mb-4">AI Suggestions</h2>
 
-        {/* JSON → FORMATTED UI */}
-      
-        {parsed ? (
+        {parsed && typeof parsed === "object" && parsed.suggestions ? (
           <div className="space-y-6 max-h-96 overflow-y-auto pr-2">
 
-            {/* Suggestions List */}
-            {parsed.suggestions && (
-              <div>
-                <h3 className="font-semibold text-gray-700 mb-2">
-                  Engagement Suggestions
-                </h3>
-                <ul className="list-disc ml-5 space-y-1 text-sm break-words">
-                  {parsed.suggestions.map((item, index) => (
-                    <li key={index}>{item}</li>
-                  ))}
-                </ul>
-              </div>
-            )}
+            {/* Suggestions */}
+            <div>
+              <h3 className="text-xl font-semibold mb-2">🌟 Engagement Suggestions</h3>
+              <ul className="list-disc ml-5 space-y-1 text-gray-700">
+                {parsed.suggestions.map((item, index) => (
+                  <li key={index}>{item}</li>
+                ))}
+              </ul>
+            </div>
 
-            {/* Instagram Feedback */}
+            {/* Instagram Caption */}
             {parsed.instagram && (
               <div>
-                <h3 className="font-semibold text-gray-700 mb-1">
-                  Instagram Feedback
-                </h3>
-                <div className="p-3 bg-gray-50 rounded text-sm whitespace-pre-wrap break-words">
+                <h3 className="text-xl font-semibold mb-1">📸 Instagram Caption</h3>
+                <div className="bg-gray-100 p-3 rounded text-sm whitespace-pre-wrap">
                   {parsed.instagram}
                 </div>
               </div>
             )}
 
-            {/* LinkedIn Feedback */}
+            {/* LinkedIn Caption */}
             {parsed.linkedin && (
               <div>
-                <h3 className="font-semibold text-gray-700 mb-1">
-                  LinkedIn Feedback
-                </h3>
-                <div className="p-3 bg-gray-50 rounded text-sm whitespace-pre-wrap break-words">
+                <h3 className="text-xl font-semibold mb-1">💼 LinkedIn Caption</h3>
+                <div className="bg-gray-100 p-3 rounded text-sm whitespace-pre-wrap">
                   {parsed.linkedin}
                 </div>
               </div>
@@ -101,12 +114,14 @@ export default function ResultPane({ result }) {
             {/* Scores */}
             {parsed.scores && (
               <div>
-                <h3 className="font-semibold text-gray-700 mb-2">Scores</h3>
-                <div className="grid grid-cols-3 gap-4 text-sm">
+                <h3 className="text-xl font-semibold mb-2">📊 Scores</h3>
+                <div className="grid grid-cols-3 gap-4">
                   {Object.entries(parsed.scores).map(([key, value]) => (
-                    <div key={key} className="bg-gray-100 p-3 rounded shadow-sm">
-                      <div className="font-medium">{key}</div>
-                      <div>{value}</div>
+                    <div key={key} className="bg-gray-100 p-3 rounded text-center">
+                      <strong className="block text-gray-700 capitalize">
+                        {key}
+                      </strong>
+                      <span className="text-lg font-semibold">{value}</span>
                     </div>
                   ))}
                 </div>
@@ -115,13 +130,12 @@ export default function ResultPane({ result }) {
 
           </div>
         ) : (
-          // Markdown fallback (if not JSON)
+          // Fallback to markdown (AI didn't return JSON)
           <div className="prose max-w-none max-h-96 overflow-y-auto break-words">
-            <ReactMarkdown>{aiSuggestions}</ReactMarkdown>
+            <ReactMarkdown>{String(aiSuggestions)}</ReactMarkdown>
           </div>
         )}
       </div>
-      
     </div>
   );
 }
