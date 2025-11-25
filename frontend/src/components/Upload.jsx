@@ -39,7 +39,7 @@ export default function Upload({ setResult }) {
     form.append("file", selectedFile);
 
     try {
-      const res = await axios.post("http://localhost:5000/api/upload", form, {
+      const res = await axios.post("https://social-media-analyzer-tau.vercel.app/api/upload", form, {
         onUploadProgress: (e) => {
           const p = Math.round((e.loaded * 100) / e.total);
           setProgress(p);
