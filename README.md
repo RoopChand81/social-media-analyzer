@@ -163,30 +163,29 @@ This tool helps creators, professionals, and marketers instantly convert raw tex
 
 ## 📸 Screenshots
 
-Add your screenshot image links inside the code block below:
+Below are the key screens of the Social Media Analyzer interface.
 
-```
-### Upload Screen
-<img src="screenshots/upload.png" width="600"/>
+### 🖼️ Upload Screen
+![Upload Screen](screenshots/upload.png)
 
-### Result Screen 1
-<img src="screenshots/result1.png" width="600"/>
+### 🖼️ Result Screen 1
+![Result Screen 1](screenshots/result1.png)
 
-### Result Screen 2
-<img src="screenshots/result2.png" width="600"/>
+### 🖼️ Result Screen 2
+![Result Screen 2](screenshots/result2.png)
 
-### Result Screen 3
-<img src="screenshots/result3.png" width="600"/>
+### 🖼️ Result Screen 3
+![Result Screen 3](screenshots/result3.png)
 
-### Result Screen 4
-<img src="screenshots/result4.png" width="600"/>
+### 🖼️ Result Screen 4
+![Result Screen 4](screenshots/result4.png)
 
-### Result Screen 5
-<img src="screenshots/result5.png" width="600"/>
+### 🖼️ Result Screen 5
+![Result Screen 5](screenshots/result5.png)
 
-### Result Screen 6
-<img src="screenshots/result6.png" width="600"/>
-```
+### 🖼️ Result Screen 6
+![Result Screen 6](screenshots/result6.png)
+
 ---
 
 ## 📝 Footer
