@@ -153,6 +153,11 @@ Responds with:
   }
 }
 ```
+## 📄 About
+
+This tool helps creators, professionals, and marketers instantly convert raw text from PDFs or images into high-performing social media posts.
+
+---
 
 ---
 
@@ -161,24 +166,27 @@ Responds with:
 Add your screenshot image links inside the code block below:
 
 ```
-/screenshots/upload.png
-/screenshots/result1.png
-/screenshots/result2.png
-/screenshots/result3.png
-/screenshots/result4.png
-/screenshots/result5.png
-/screenshots/result6.png
+### Upload Screen
+<img src="screenshots/upload.png" width="600"/>
 
+### Result Screen 1
+<img src="screenshots/result1.png" width="600"/>
+
+### Result Screen 2
+<img src="screenshots/result2.png" width="600"/>
+
+### Result Screen 3
+<img src="screenshots/result3.png" width="600"/>
+
+### Result Screen 4
+<img src="screenshots/result4.png" width="600"/>
+
+### Result Screen 5
+<img src="screenshots/result5.png" width="600"/>
+
+### Result Screen 6
+<img src="screenshots/result6.png" width="600"/>
 ```
-
-(Just replace the filenames with actual image paths.)
-
----
-
-## 📄 About
-
-This tool helps creators, professionals, and marketers instantly convert raw text from PDFs or images into high-performing social media posts.
-
 ---
 
 ## 📝 Footer
